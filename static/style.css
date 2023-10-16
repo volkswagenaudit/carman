@@ -1,0 +1,231 @@
+/* Essential Styles */
+
+body {
+    margin-top: 80px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: whitesmoke;
+}
+
+.navbar {
+    background-color: #4CAF50;
+    padding: 8px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar a {
+    color: black;
+    margin: 0 15px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.navbar a:hover, 
+.navbar .active {
+    color: rgb(16, 16, 16);
+    background-color: #38a33c;
+}
+
+.navbar .active {
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+}
+
+.navbar img {
+    margin-right: 5px;
+    width: 22px;
+    height: 22px;
+}
+
+.navbar a::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    background-color: rgba(76, 175, 80, 0.2);
+    z-index: -1;
+    transition: all 0.3s ease;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.navbar a:hover::before, 
+.navbar .active::before {
+    visibility: visible;
+    opacity: 1;
+}
+
+.title {
+    display: none;  /* Hide by default */
+}
+
+.form-control:focus, .custom-select:focus {
+    outline: 2px solid  #00ff08 !important;
+    outline-offset: 0 !important;
+    box-shadow: none !important;
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+
+    body {
+        margin-top: -15px;
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+
+    .navbar {
+        top: auto;
+        bottom: 0;
+        border-top: 0.5px solid #000;
+        background-color: #fcfcfc;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .navbar a:hover, 
+    .navbar .active {
+    color: rgb(16, 16, 16);
+    background-color: #fcfcfc;
+    }
+    
+    .title {
+        display: block;
+        font-size: 20px;
+        font-weight: 600;
+        background-color: #4CAF50;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+    }
+
+    .navbar a {
+        flex-direction: column;
+        padding: 0.1px;
+    }
+
+    .navbar img {
+        margin: 4px 0;
+        width: 25px;
+        height: 25px;
+    }
+
+
+    /* Mobile-first styles */
+.navbar {
+    background-color: #fafafa;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-around; /* Evenly distribute the links */
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 1000;
+    
+}
+
+.navbar a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar img {
+    margin-bottom: 4px;
+    width: 25px;
+    height: 25px;
+}
+
+/* Assuming the title bar at the top is called .title */
+
+
+.form-control, .custom-select {
+    width: 90%; /* Adjust to your liking */
+    margin: 10px auto;
+    display: block;
+    padding: 10px; /* Makes the input fields a bit taller for easier tapping */
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    width: 30%;
+    margin: 20px auto;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+
+
+
+/* Feel free to add other styles for h1, h2, p and other elements as per your design and content layout. */
+
+}
+
+button[type="submit"] {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Main content styles */
+h1, h2, p {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+}
+
+img.big-image {
+    display: block;
+    max-width: 80%;
+    margin: 40px auto;
+}
+
+p {
+    max-width: 80%;
+    margin: 30px auto;
+}

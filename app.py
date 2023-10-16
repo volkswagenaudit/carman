@@ -7,6 +7,9 @@ import sys
 app = Flask(__name__)
 freezer = Freezer(app)
 
+# Configure the base URL for Frozen-Flask
+app.config['FREEZER_BASE_URL'] = 'https://volkswagenaudit.github.io/carman/'
+
 # Configure Google Sheets
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_name("/Users/kaedingraham/Downloads/carman-401622-51cd525af142.json", scope)

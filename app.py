@@ -1,8 +1,11 @@
+from flask_frozen import Freezer
 from flask import Flask, render_template, request, redirect, url_for
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import sys
 
 app = Flask(__name__)
+freezer = Freezer(app)
 
 # Configure Google Sheets
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -41,4 +44,8 @@ def signout():
     return render_template('signout.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    if len(sys.argv) > 1 and sys.argv[1] == "build":
+        freezer.freeze()
+    else:
+        app.run(debug=True)
+

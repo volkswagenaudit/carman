@@ -7,7 +7,7 @@ app = Flask(__name__)
 # Function to initialize Google Sheets client
 def init_gspread_client():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("/Users/kaedingraham/Downloads/carman-401622-51cd525af142.json", scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name("carman-401622-51cd525af142.json", scope)
     client = gspread.authorize(creds)
     return client.open("carmandata").sheet1
 

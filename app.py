@@ -4,11 +4,12 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 app = Flask(__name__)
 
-# Configure Google Sheets
-scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("/Users/kaedingraham/Downloads/carman-401622-51cd525af142.json", scope)
-client = gspread.authorize(creds)
-sheet = client.open("carmandata").sheet1
+# Function to initialize Google Sheets client
+def init_gspread_client():
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    creds = ServiceAccountCredentials.from_json_keyfile_name("/Users/kaedingraham/Downloads/carman-401622-51cd525af142.json", scope)
+    client = gspread.authorize(creds)
+    return client.open("carmandata").sheet1
 
 @app.route('/')
 def home():
@@ -21,8 +22,13 @@ def design():
         email = request.form['email']
         message = request.form['message']
         
-        # Save data to Google Sheet
-        sheet.append_row([name, email, message])
+        try:
+            sheet = init_gspread_client()
+            sheet.append_row([name, email, message])
+        except Exception as e:
+            print(e)
+            return "There was an error saving to Google Sheets."
+        
         return redirect(url_for('home'))
     return render_template('design.html')
 
@@ -35,8 +41,13 @@ def signout():
         issues = request.form['issues']
         dateTime = request.form['dateTime']
         
-        # Save data to Google Sheet
-        sheet.append_row([name, odometer, rego, issues, dateTime])
+        try:
+            sheet = init_gspread_client()
+            sheet.append_row([name, odometer, rego, issues, dateTime])
+        except Exception as e:
+            print(e)
+            return "There was an error saving to Google Sheets."
+        
         return redirect(url_for('home'))
     return render_template('signout.html')
 

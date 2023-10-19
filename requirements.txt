@@ -5,7 +5,7 @@ charset-normalizer==3.3.0
 click==8.1.7
 cloudevents==1.10.0
 deprecation==2.1.0
-Flask==2.3.5
+Flask==2.2.5
 functions-framework==3.4.0
 google-auth==2.23.3
 google-auth-oauthlib==1.1.0

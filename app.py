@@ -11,7 +11,7 @@ def init_gspread_client():
     client = gspread.authorize(creds)
     return client.open("carmandata").sheet1
 
-@app.route('/')
+@app.route('/'), endpoint='index')
 def home():
     return render_template('index.html')
 

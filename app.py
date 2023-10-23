@@ -23,13 +23,16 @@ def design():
         message = request.form['message']
         
         try:
+            # Attempt to save to Google Sheets
             sheet = init_gspread_client()
             sheet.append_row([name, email, message])
+            
+            # Attempt to redirect
+            return redirect(url_for('home'))
         except Exception as e:
-            print(e)
-            return "There was an error saving to Google Sheets."
+            print(f"Error: {e}")
+            return f"There was an error: {e}"
         
-        return redirect(url_for('home'))
     return render_template('design.html')
 
 @app.route('/signout', methods=['GET', 'POST'])

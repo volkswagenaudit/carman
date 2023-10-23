@@ -28,7 +28,7 @@ def design():
             sheet.append_row([name, email, message])
             
             # Attempt to redirect
-            return redirect(url_for('home'))
+            return redirect(url_for('index'))
         except Exception as e:
             print(f"Error: {e}")
             return f"There was an error: {e}"

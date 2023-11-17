@@ -7,6 +7,13 @@ body {
     background-color: whitesmoke;
 }
 
+/* Reset styles for datetime-local input */
+input[type="datetime-local"] {
+    width: auto; /* Set to the default width */
+    /* Add any other necessary default styles */
+}
+
+
 .navbar {
     background-color: #4CAF50;
     padding: 8px 0;

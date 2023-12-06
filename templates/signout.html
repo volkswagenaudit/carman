@@ -81,20 +81,26 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setAucklandTime();
+    });
+
     function setAucklandTime() {
-        // Get the current date and time in Auckland timezone
-        var now = new Date().toLocaleString("en-US", {timeZone: "Pacific/Auckland"});
-        
+        // Get the current UTC date and time
+        var now = new Date();
+
+        // Auckland is UTC+12 or UTC+13 depending on daylight saving
+        // Adjust this as per daylight saving in Auckland
+        var aucklandOffset = 13; // or 12
+        var currentUtcOffset = now.getTimezoneOffset() / 60;
+        now.setHours(now.getHours() + aucklandOffset - currentUtcOffset);
+
         // Convert to a format suitable for the datetime-local input
-        var localDate = new Date(now);
-        var dateTimeLocal = localDate.toISOString().slice(0,16);
+        var dateTimeLocal = now.toISOString().slice(0,16);
 
         // Set the value of the input field
         document.getElementById('dateTime').value = dateTimeLocal;
     }
-
-    // Set Auckland time as default value when the page loads
-    window.onload = setAucklandTime;
 </script>
 
 <script>

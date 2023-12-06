@@ -80,35 +80,36 @@
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        setAucklandTime();
-    });
+  function setAucklandTime() {
+    var now = new Date();
 
-    function setAucklandTime() {
-        var now = new Date();
+    // Set the offset for NZST (UTC+12)
+    var aucklandOffset = 12;
 
-        // Auckland is typically UTC+12, but UTC+13 during daylight saving time.
-        // Calculate the offset from UTC considering daylight saving.
-        var aucklandOffset = 12; // Default to UTC+12
+    // Determine the start and end dates of DST for the current year
+    var currentYear = now.getFullYear();
+    var startDST = new Date(currentYear, 8, 24); // Last Sunday in September
+    var endDST = new Date(currentYear, 3, 1);   // First Sunday in April
 
-        // Check if current date is within daylight saving period for Auckland
-        var startDST = new Date(now.getFullYear(), 8, 24); // Approximate start of DST (last Sunday in September)
-        var endDST = new Date(now.getFullYear(), 3, 1);   // Approximate end of DST (first Sunday in April)
-        if (now >= startDST && now < endDST) {
-            aucklandOffset = 13; // Adjust for daylight saving time
-        }
+    // Adjust the dates to the correct Sundays
+    startDST.setDate(startDST.getDate() + (7 - startDST.getDay()) % 7);
+    endDST.setDate(endDST.getDate() + (7 - endDST.getDay()) % 7);
 
-        // Adjust the current UTC time by the Auckland offset
-        now.setHours(now.getUTCHours() + aucklandOffset);
-
-        // Format the time for the datetime-local input
-        var dateTimeLocal = now.toISOString().slice(0,16);
-
-        // Set the value of the input field
-        document.getElementById('dateTime').value = dateTimeLocal;
+    // Check if current date is within DST period and adjust offset if necessary
+    if (now >= startDST && now < endDST) {
+        aucklandOffset = 13; // UTC+13 during DST
     }
-</script>
+
+    // Adjust the current UTC time by the Auckland offset
+    now.setHours(now.getUTCHours() + aucklandOffset);
+
+    // Format the time for the datetime-local input
+    var dateTimeLocal = now.toISOString().slice(0, 16);
+
+    // Set the value of the input field
+    document.getElementById('dateTime').value = dateTimeLocal;
+}
+
 
 
 

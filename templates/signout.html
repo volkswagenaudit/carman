@@ -67,8 +67,20 @@
             <label for="dateTime">Date and Time*</label>
             <input type="datetime-local" class="form-control" id="dateTime" name="dateTime" value="" required>
         </div>
-           
-            <script>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+        <!-- End of the Form -->
+    </div>
+
+    <!-- jQuery library (required for Bootstrap's JavaScript) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
     function setAucklandTime() {
         // Get the current date and time in Auckland timezone
         var now = new Date().toLocaleString("en-US", {timeZone: "Pacific/Auckland"});
@@ -84,26 +96,6 @@
     // Set Auckland time as default value when the page loads
     window.onload = setAucklandTime;
 </script>
-
-
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-success">Submit</button>
-        </form>
-        <!-- End of the Form -->
-    </div>
-
-    <!-- jQuery library (required for Bootstrap's JavaScript) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-        // Set the datetime input to the current date and time
-        const now = new Date().toISOString().slice(0, 16);
-        document.getElementById('dateTime').value = now;
-    </script>
 
 <script>
     if ('serviceWorker' in navigator) {

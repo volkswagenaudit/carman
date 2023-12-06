@@ -88,19 +88,28 @@
     function setAucklandTime() {
         var now = new Date();
 
-        // Determine whether it's daylight saving period in Auckland
-        // These dates might change and need to be updated accordingly
-        var startDST = new Date(now.getFullYear(), 8, 24); // Last Sunday of September
-        var endDST = new Date(now.getFullYear(), 3, 1);   // First Sunday of April
-        var isDST = now >= startDST && now < endDST;
-        var aucklandOffset = isDST ? 13 : 12;
+        // Auckland is typically UTC+12, but UTC+13 during daylight saving time.
+        // Calculate the offset from UTC considering daylight saving.
+        var aucklandOffset = 12; // Default to UTC+12
 
-        now.setHours(now.getHours() + aucklandOffset - (now.getTimezoneOffset() / 60));
+        // Check if current date is within daylight saving period for Auckland
+        var startDST = new Date(now.getFullYear(), 8, 24); // Approximate start of DST (last Sunday in September)
+        var endDST = new Date(now.getFullYear(), 3, 1);   // Approximate end of DST (first Sunday in April)
+        if (now >= startDST && now < endDST) {
+            aucklandOffset = 13; // Adjust for daylight saving time
+        }
 
+        // Adjust the current UTC time by the Auckland offset
+        now.setHours(now.getUTCHours() + aucklandOffset);
+
+        // Format the time for the datetime-local input
         var dateTimeLocal = now.toISOString().slice(0,16);
+
+        // Set the value of the input field
         document.getElementById('dateTime').value = dateTimeLocal;
     }
 </script>
+
 
 
 

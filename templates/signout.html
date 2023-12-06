@@ -86,14 +86,11 @@
     });
 
     function setAucklandTime() {
-        // Get the current UTC date and time
         var now = new Date();
 
-        // Auckland is UTC+12 or UTC+13 depending on daylight saving
-        // Adjust this as per daylight saving in Auckland
-        var aucklandOffset = 13; // or 12
-        var currentUtcOffset = now.getTimezoneOffset() / 60;
-        now.setHours(now.getHours() + aucklandOffset - currentUtcOffset);
+        // Set the correct offset for Auckland
+        var aucklandOffset = now.getTimezoneOffset() < 0 ? 12 : 13; // Change as per DST
+        now.setHours(now.getHours() + aucklandOffset);
 
         // Convert to a format suitable for the datetime-local input
         var dateTimeLocal = now.toISOString().slice(0,16);
@@ -102,6 +99,7 @@
         document.getElementById('dateTime').value = dateTimeLocal;
     }
 </script>
+
 
 <script>
     if ('serviceWorker' in navigator) {

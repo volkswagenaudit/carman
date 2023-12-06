@@ -86,28 +86,22 @@
     });
 
     function setAucklandTime() {
-        // Create a date object for the current time in Auckland
-        var aucklandTime = new Intl.DateTimeFormat('en-US', {
-            timeZone: 'Pacific/Auckland',
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false
-        }).format(new Date());
+        var now = new Date();
 
-        // Convert the formatted string to a Date object
-        var dateTimeLocal = new Date(aucklandTime);
+        // Determine whether it's daylight saving period in Auckland
+        // These dates might change and need to be updated accordingly
+        var startDST = new Date(now.getFullYear(), 8, 24); // Last Sunday of September
+        var endDST = new Date(now.getFullYear(), 3, 1);   // First Sunday of April
+        var isDST = now >= startDST && now < endDST;
+        var aucklandOffset = isDST ? 13 : 12;
 
-        // Adjust the format for the datetime-local input
-        dateTimeLocal = dateTimeLocal.toISOString().slice(0,16);
+        now.setHours(now.getHours() + aucklandOffset - (now.getTimezoneOffset() / 60));
 
-        // Set the value of the input field
+        var dateTimeLocal = now.toISOString().slice(0,16);
         document.getElementById('dateTime').value = dateTimeLocal;
     }
 </script>
+
 
 
 

@@ -69,7 +69,20 @@
         </div>
            
             <script>
-    document.getElementById('dateTime').value = new Date().toLocaleString();
+    function setAucklandTime() {
+        // Get the current date and time in Auckland timezone
+        var now = new Date().toLocaleString("en-US", {timeZone: "Pacific/Auckland"});
+        
+        // Convert to a format suitable for the datetime-local input
+        var localDate = new Date(now);
+        var dateTimeLocal = localDate.toISOString().slice(0,16);
+
+        // Set the value of the input field
+        document.getElementById('dateTime').value = dateTimeLocal;
+    }
+
+    // Set Auckland time as default value when the page loads
+    window.onload = setAucklandTime;
 </script>
 
 

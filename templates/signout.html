@@ -88,17 +88,20 @@
     function setAucklandTime() {
         var now = new Date();
 
-        // Set the correct offset for Auckland
-        var aucklandOffset = now.getTimezoneOffset() < 0 ? 12 : 13; // Change as per DST
-        now.setHours(now.getHours() + aucklandOffset);
+        // Determine whether it's daylight saving period in Auckland
+        // These dates might change and need to be updated accordingly
+        var startDST = new Date(now.getFullYear(), 8, 24); // Last Sunday of September
+        var endDST = new Date(now.getFullYear(), 3, 1);   // First Sunday of April
+        var isDST = now >= startDST && now < endDST;
+        var aucklandOffset = isDST ? 13 : 12;
 
-        // Convert to a format suitable for the datetime-local input
+        now.setHours(now.getHours() + aucklandOffset - (now.getTimezoneOffset() / 60));
+
         var dateTimeLocal = now.toISOString().slice(0,16);
-
-        // Set the value of the input field
         document.getElementById('dateTime').value = dateTimeLocal;
     }
 </script>
+
 
 
 <script>
